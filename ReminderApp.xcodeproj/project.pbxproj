@@ -25,8 +25,6 @@
 		356EF7072C33F7830053974F /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF7062C33F7830053974F /* AddTaskViewController.swift */; };
 		356EF7092C33F7C30053974F /* TaskListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF7082C33F7C30053974F /* TaskListDetailViewController.swift */; };
 		356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */; };
-		356EF70D2C33F7F50053974F /* AddTaskVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */; };
-		3586C50D2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */; };
 		3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50F2C343E2E0093A00F /* RealmModel.swift */; };
 		3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */; };
 /* End PBXBuildFile section */
@@ -50,8 +48,6 @@
 		356EF7062C33F7830053974F /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
 		356EF7082C33F7C30053974F /* TaskListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailViewController.swift; sourceTree = "<group>"; };
 		356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailVCTableViewCell.swift; sourceTree = "<group>"; };
-		356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVCTableViewCell.swift; sourceTree = "<group>"; };
-		3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVCTableViewCellTitleMemo.swift; sourceTree = "<group>"; };
 		3586C50F2C343E2E0093A00F /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,8 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				356EF7062C33F7830053974F /* AddTaskViewController.swift */,
-				3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */,
-				356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -247,7 +241,6 @@
 				356EF6E92C33E5860053974F /* BaseViewController.swift in Sources */,
 				356EF7052C33F1FC0053974F /* BaseTableViewCell.swift in Sources */,
 				356EF7092C33F7C30053974F /* TaskListDetailViewController.swift in Sources */,
-				3586C50D2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift in Sources */,
 				356EF7022C33F1C70053974F /* BaseCollectionViewCell.swift in Sources */,
 				356EF6F92C33EEB50053974F /* DesignResource.swift in Sources */,
 				356EF6D52C33E3B30053974F /* AppDelegate.swift in Sources */,
@@ -256,7 +249,6 @@
 				3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */,
 				356EF6FE2C33F17C0053974F /* ReusableIdentifierProtocol.swift in Sources */,
 				356EF6D72C33E3B30053974F /* SceneDelegate.swift in Sources */,
-				356EF70D2C33F7F50053974F /* AddTaskVCTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

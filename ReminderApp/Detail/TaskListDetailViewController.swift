@@ -80,14 +80,22 @@ extension TaskListDetailViewController {
      
         let dueDateOrderFilter = UIAction(title: "마감임박순") { _ in
             print("마감임박")
+            self.addedTaskList = self.realm.objects(TaskTable.self).sorted(byKeyPath: "dueDate", ascending: true)
+            self.tableView.reloadData()
         }
         
         let titleOrderFilter = UIAction(title: "제목순") { _ in
             print("제목순")
+            self.addedTaskList = self.realm.objects(TaskTable.self).sorted(byKeyPath: "taskTitle", ascending: true)
+            self.tableView.reloadData()
         }
         
         let lowPriorityOnlyFilter = UIAction(title: "우선순위 낮음만") { _ in
             print("우선순위낮음만")
+            self.addedTaskList = self.realm.objects(TaskTable.self).where{
+                $0.priorityCheck == "low"
+            }.sorted(byKeyPath: "taskTitle", ascending: true)
+            self.tableView.reloadData()
         }
         
         let menu = UIMenu(title: "필터 옵션", options: .displayInline, children: [dueDateOrderFilter,titleOrderFilter,lowPriorityOnlyFilter])

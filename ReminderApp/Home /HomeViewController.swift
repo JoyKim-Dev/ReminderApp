@@ -29,6 +29,10 @@ final class HomeViewController: BaseViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        collectionView.reloadData()
+    }
+    
     override func configHierarchy() {
         view.addSubview(titleLabel)
         view.addSubview(collectionView)
@@ -83,6 +87,7 @@ extension HomeViewController {
         
         let dueDateOrderFilter = UIAction(title: "마감임박순") { _ in
             print("마감임박")
+            
         }
         
         let titleOrderFilter = UIAction(title: "제목순") { _ in
@@ -121,7 +126,7 @@ extension HomeViewController {
         print(#function)
         
         let nav = UINavigationController(rootViewController: AddTaskViewController())
-        nav.modalPresentationStyle = .popover
+        nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
         
     }
@@ -152,7 +157,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
       
-        var count = realm.objects(TaskTable.self).count
+        let count = realm.objects(TaskTable.self).count
         
         cell.configUI(count: count, row: indexPath.row)
         
