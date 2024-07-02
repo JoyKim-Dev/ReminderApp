@@ -74,11 +74,31 @@ extension TaskListDetailViewController {
     
     func setupNavigationBar() {
         
+        // 꾹 눌러야 실행됨! showsasprimaryaction 불가능. todo
         navPullDownBtn = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(dropDownNavBtnTapped))
         
-        navigationItem.rightBarButtonItem = navPullDownBtn
+     
+        let dueDateOrderFilter = UIAction(title: "마감임박순") { _ in
+            print("마감임박")
+        }
         
+        let titleOrderFilter = UIAction(title: "제목순") { _ in
+            print("제목순")
+        }
+        
+        let lowPriorityOnlyFilter = UIAction(title: "우선순위 낮음만") { _ in
+            print("우선순위낮음만")
+        }
+        
+        let menu = UIMenu(title: "필터 옵션", options: .displayInline, children: [dueDateOrderFilter,titleOrderFilter,lowPriorityOnlyFilter])
+        
+        navPullDownBtn.menu = menu
+      //  navPullDownBtn.showsMenuAsPrimaryAction = true
+    
+        navigationItem.rightBarButtonItem = navPullDownBtn
     }
+        
+   
     
     @objc func dropDownNavBtnTapped() {
         

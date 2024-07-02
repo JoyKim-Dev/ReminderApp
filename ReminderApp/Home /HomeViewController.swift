@@ -8,12 +8,14 @@
 import UIKit
 
 import SnapKit
+import RealmSwift
 
 final class HomeViewController: BaseViewController {
-    
+    let realm = try! Realm()
    private var addTaskBtn: UIBarButtonItem!
    private var addCategoryBtn: UIBarButtonItem!
    private var navPullDownBtn: UIBarButtonItem!
+
     
    private let titleLabel = UILabel()
    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
@@ -52,10 +54,6 @@ final class HomeViewController: BaseViewController {
         titleLabel.text = "전체"
         titleLabel.font = Font.heavy30
         titleLabel.textColor = Color.orange
-        
-
-        
-   
     }
     
 }
@@ -131,9 +129,9 @@ extension HomeViewController {
     @objc func addCategoryBtnTapped() {
         print(#function)
         
-        let nav = UINavigationController(rootViewController: TaskListDetailViewController())
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+//        let nav = UINavigationController(rootViewController: TaskListDetailViewController())
+//        nav.modalPresentationStyle = .fullScreen
+//        present(nav, animated: true)
     }
     
     @objc func dropDownNavBtnTapped() {
@@ -153,8 +151,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
-        //db저장된data양전달
-        cell.configUI(count: 0, row: indexPath.row)
+      
+        var count = realm.objects(TaskTable.self).count
+        
+        cell.configUI(count: count, row: indexPath.row)
         
         return cell
     }
@@ -165,12 +165,4 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         navigationController?.pushViewController(vc, animated: true)
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
