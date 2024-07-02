@@ -26,6 +26,9 @@
 		356EF7092C33F7C30053974F /* TaskListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF7082C33F7C30053974F /* TaskListDetailViewController.swift */; };
 		356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */; };
 		356EF70D2C33F7F50053974F /* AddTaskVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */; };
+		3586C50D2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */; };
+		3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50F2C343E2E0093A00F /* RealmModel.swift */; };
+		3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		356EF7082C33F7C30053974F /* TaskListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailViewController.swift; sourceTree = "<group>"; };
 		356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailVCTableViewCell.swift; sourceTree = "<group>"; };
 		356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVCTableViewCell.swift; sourceTree = "<group>"; };
+		3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVCTableViewCellTitleMemo.swift; sourceTree = "<group>"; };
+		3586C50F2C343E2E0093A00F /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,7 @@
 		356EF6D32C33E3B30053974F /* ReminderApp */ = {
 			isa = PBXGroup;
 			children = (
+				3586C50E2C343E1D0093A00F /* DataBase */,
 				356EF7032C33F1EA0053974F /* Base */,
 				356EF6FA2C33F12E0053974F /* Home  */,
 				356EF6FB2C33F13D0053974F /* Add */,
@@ -94,6 +101,7 @@
 				356EF6DF2C33E3B40053974F /* LaunchScreen.storyboard */,
 				356EF6E22C33E3B40053974F /* Info.plist */,
 				356EF6FD2C33F17C0053974F /* ReusableIdentifierProtocol.swift */,
+				3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */,
 			);
 			path = ReminderApp;
 			sourceTree = "<group>";
@@ -120,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				356EF7062C33F7830053974F /* AddTaskViewController.swift */,
+				3586C50C2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift */,
 				356EF70C2C33F7F50053974F /* AddTaskVCTableViewCell.swift */,
 			);
 			path = Add;
@@ -142,6 +151,14 @@
 				356EF7012C33F1C70053974F /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		3586C50E2C343E1D0093A00F /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				3586C50F2C343E2E0093A00F /* RealmModel.swift */,
+			);
+			path = DataBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,10 +247,13 @@
 				356EF6E92C33E5860053974F /* BaseViewController.swift in Sources */,
 				356EF7052C33F1FC0053974F /* BaseTableViewCell.swift in Sources */,
 				356EF7092C33F7C30053974F /* TaskListDetailViewController.swift in Sources */,
+				3586C50D2C33FE6B0093A00F /* AddTaskVCTableViewCellTitleMemo.swift in Sources */,
 				356EF7022C33F1C70053974F /* BaseCollectionViewCell.swift in Sources */,
 				356EF6F92C33EEB50053974F /* DesignResource.swift in Sources */,
 				356EF6D52C33E3B30053974F /* AppDelegate.swift in Sources */,
+				3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */,
 				356EF7072C33F7830053974F /* AddTaskViewController.swift in Sources */,
+				3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */,
 				356EF6FE2C33F17C0053974F /* ReusableIdentifierProtocol.swift in Sources */,
 				356EF6D72C33E3B30053974F /* SceneDelegate.swift in Sources */,
 				356EF70D2C33F7F50053974F /* AddTaskVCTableViewCell.swift in Sources */,

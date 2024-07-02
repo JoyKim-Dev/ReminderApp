@@ -52,6 +52,9 @@ final class HomeViewController: BaseViewController {
         titleLabel.text = "전체"
         titleLabel.font = Font.heavy30
         titleLabel.textColor = Color.orange
+        
+
+        
    
     }
     
@@ -80,8 +83,24 @@ extension HomeViewController {
         
         navPullDownBtn = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), style: .plain, target: self, action: #selector(dropDownNavBtnTapped))
         
-        navigationItem.rightBarButtonItem = navPullDownBtn
+        let dueDateOrderFilter = UIAction(title: "마감임박순") { _ in
+            print("마감임박")
+        }
         
+        let titleOrderFilter = UIAction(title: "제목순") { _ in
+            print("제목순")
+        }
+        
+        let lowPriorityOnlyFilter = UIAction(title: "우선순위 낮음만") { _ in
+            print("우선순위낮음만")
+        }
+        
+        let menu = UIMenu(title: "필터 옵션", options: .displayInline, children: [dueDateOrderFilter,titleOrderFilter,lowPriorityOnlyFilter])
+        
+        navPullDownBtn.menu = menu
+      //  navPullDownBtn.showsMenuAsPrimaryAction = true
+    
+        navigationItem.rightBarButtonItem = navPullDownBtn
     }
     
     func setupToolBar(){
@@ -103,11 +122,18 @@ extension HomeViewController {
     @objc func addTaskBtnTapped() {
         print(#function)
         
+        let nav = UINavigationController(rootViewController: AddTaskViewController())
+        nav.modalPresentationStyle = .popover
+        present(nav, animated: true)
+        
     }
     
     @objc func addCategoryBtnTapped() {
         print(#function)
         
+        let nav = UINavigationController(rootViewController: TaskListDetailViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
     @objc func dropDownNavBtnTapped() {
@@ -126,9 +152,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeViewCollectionViewCell.identifier, for: indexPath) as! HomeViewCollectionViewCell
         
         cell.layer.cornerRadius = 10
-        cell.clipsToBounds = true 
+        cell.clipsToBounds = true
+        //db저장된data양전달
+        cell.configUI(count: 0, row: indexPath.row)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+      let vc = TaskListDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     
