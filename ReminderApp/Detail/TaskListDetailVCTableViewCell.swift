@@ -72,10 +72,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         titleLabel.text = data.taskTitle
         memoLabel.text = data.memoContent
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy년 MM월 dd일 H시 mm분"
-        let dateString = dateFormatter.string(from: data.dueDate)
-        dateLabel.text = dateString
+        dateLabel.text = data.dueDate
     }
     
 }

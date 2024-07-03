@@ -136,7 +136,10 @@ final class AddTaskViewController: BaseViewController {
         memoLabel.text = "메모"
         memoLabel.textColor = Color.lightGray
         
+        dueDateBtn.addTarget(self, action: #selector(dueDateBtnTapped), for: .touchUpInside)
+        
     }
+    
 }
 
 extension AddTaskViewController {
@@ -178,8 +181,10 @@ extension AddTaskViewController {
          
             return
         }
+        guard let date = dueDateBtn.label.text else {return}
         
-        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: Date(), tag: nil, priorityCheck: nil, image: nil)
+        
+        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: nil, priorityCheck: nil, image: nil)
         navBackBtn.isEnabled = true
         
 //        저장 요청
@@ -196,6 +201,16 @@ extension AddTaskViewController {
         
         dismiss(animated: true)
         }
+    
+    @objc func dueDateBtnTapped() {
+        
+        let vc = DueDateViewController()
+        vc.dueDatePicked = { value in
+            
+            self.dueDateBtn.label.text = value
+        }
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     }
 
