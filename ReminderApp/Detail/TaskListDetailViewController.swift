@@ -159,4 +159,9 @@ extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSour
         
         return UISwipeActionsConfiguration(actions: [deleteCell])
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = TaskDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

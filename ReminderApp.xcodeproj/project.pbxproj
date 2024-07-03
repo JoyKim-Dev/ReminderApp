@@ -32,6 +32,7 @@
 		35F6B3482C353498001FACC3 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3472C353498001FACC3 /* TagViewController.swift */; };
 		35F6B34A2C3534A8001FACC3 /* PriorityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3492C3534A8001FACC3 /* PriorityViewController.swift */; };
 		35F6B34D2C353CDF001FACC3 /* PassDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B34C2C353CDF001FACC3 /* PassDataDelegate.swift */; };
+		35F6B34F2C35451A001FACC3 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B34E2C35451A001FACC3 /* TaskDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		35F6B3472C353498001FACC3 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
 		35F6B3492C3534A8001FACC3 /* PriorityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewController.swift; sourceTree = "<group>"; };
 		35F6B34C2C353CDF001FACC3 /* PassDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassDataDelegate.swift; sourceTree = "<group>"; };
+		35F6B34E2C35451A001FACC3 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			children = (
 				356EF7082C33F7C30053974F /* TaskListDetailViewController.swift */,
 				356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */,
+				35F6B34E2C35451A001FACC3 /* TaskDetailViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */,
 				35F6B34A2C3534A8001FACC3 /* PriorityViewController.swift in Sources */,
 				356EF6D92C33E3B30053974F /* ViewController.swift in Sources */,
+				35F6B34F2C35451A001FACC3 /* TaskDetailViewController.swift in Sources */,
 				35F6B3462C35348A001FACC3 /* DueDateViewController.swift in Sources */,
 				356EF7002C33F1A10053974F /* HomeViewCollectionViewCell.swift in Sources */,
 				356EF6E92C33E5860053974F /* BaseViewController.swift in Sources */,

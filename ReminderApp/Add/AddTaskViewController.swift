@@ -19,26 +19,28 @@ final class AddTaskViewController: BaseViewController {
     
     private let taskView = UIView()
     private let titleLabel = UILabel()
-     private let titleTextField = UITextField()
+    private let titleTextField = UITextField()
     private let lineView = UIView()
     private let memoLabel = UILabel()
-     private let memoTextView = UITextView()
+    private let memoTextView = UITextView()
     private var dueDateBtn = LabelButton(title: "마감일")
     private var tagBtn = LabelButton(title: "태그")
     private var priorityBtn = LabelButton(title: "우선 순위")
     private var addImageBtn = LabelButton(title: "이미지 추가")
-
+    
     private let btnLabel = UILabel()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = "새로운 할 일"
         titleTextField.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(priorityReceivedNotification), name: NSNotification.Name("send Priority"), object: nil)
+        
         setupNavSaveBtn()
         setupNavBackBtn()
-        
     }
     
     override func configHierarchy() {
@@ -97,7 +99,7 @@ final class AddTaskViewController: BaseViewController {
             make.top.equalTo(taskView.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
-           
+            
         }
         
         
@@ -105,14 +107,14 @@ final class AddTaskViewController: BaseViewController {
             make.top.equalTo(dueDateBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
-           
+            
         }
         
         priorityBtn.snp.makeConstraints { make in
             make.top.equalTo(tagBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
-           
+            
         }
         
         addImageBtn.snp.makeConstraints { make in
@@ -138,9 +140,9 @@ final class AddTaskViewController: BaseViewController {
         
         dueDateBtn.addTarget(self, action: #selector(dueDateBtnTapped), for: .touchUpInside)
         tagBtn.addTarget(self, action: #selector(tagBtnTapped), for: .touchUpInside)
+        priorityBtn.addTarget(self, action: #selector(priorityBtnTapped), for: .touchUpInside)
         
     }
-    
 }
 
 extension AddTaskViewController {
@@ -165,10 +167,10 @@ extension AddTaskViewController {
     // DB에 데이터 저장!
     @objc func navSaveBtnTapped() {
         print(#function)
-//        빈칸찾기
+        //        빈칸찾기
         let realm = try! Realm()
         
-//        내용 채우기
+        //        내용 채우기
         
         guard let title = titleTextField.text, !title.isEmpty else {
             let alert = UIAlertController(
@@ -179,17 +181,16 @@ extension AddTaskViewController {
             alert.addAction(ok)
             present(alert, animated: true)
             
-         
             return
         }
         
-            guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text else {return}
-       
+        guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text else {return}
+        
         
         newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: tag, priorityCheck: nil, image: nil)
         navBackBtn.isEnabled = true
         
-//        저장 요청
+        //        저장 요청
         guard let data = newTaskData else {
             print("데이터값없음")
             return
@@ -198,12 +199,9 @@ extension AddTaskViewController {
             realm.add(data)
             print("저장완료")
         }
-        
-        
-        
+ 
         dismiss(animated: true)
-        }
-    
+    }
     @objc func dueDateBtnTapped() {
         
         let vc = DueDateViewController()
@@ -219,7 +217,31 @@ extension AddTaskViewController {
         vc.sendTag = self
         navigationController?.pushViewController(vc, animated: true)
     }
+    @objc func priorityBtnTapped() {
+
+        let vc = PriorityViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func priorityReceivedNotification(notification: NSNotification) {
+        (#function)
+        print("받음")
+        if let result = notification.userInfo?["priority"] as? Int {
+            
+            switch result {
+            case 0:
+                priorityBtn.label.text = "높음"
+            case 1:
+                priorityBtn.label.text = "보통"
+            case 2:
+                priorityBtn.label.text = "낮음"
+            default:
+                priorityBtn.label.text = ""
+            }
+        }
+    }
+}
+
 
 extension AddTaskViewController: UITextFieldDelegate {
     
@@ -227,7 +249,7 @@ extension AddTaskViewController: UITextFieldDelegate {
         if ((titleTextField.text?.isEmpty) != nil) {
             navSaveBtn.isEnabled = false
         }
-        }
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if titleTextField.text != nil {
@@ -236,11 +258,15 @@ extension AddTaskViewController: UITextFieldDelegate {
         }
         return true
     }
-    }
-    
+}
+
 extension AddTaskViewController: PassDataDelegate {
     func passDataValue(text: String) {
-        tagBtn.label.text = "#\(text)"
+        if text.isEmpty {
+            tagBtn.label.text = text
+        } else {
+            tagBtn.label.text = "#\(text)"
+        }
         tagBtn.label.textColor = .blue
         tagBtn.label.font = Font.semiBold15
         print(text)
