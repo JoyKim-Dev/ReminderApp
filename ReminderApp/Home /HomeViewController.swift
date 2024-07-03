@@ -215,6 +215,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 $0.dueDate.contains(dateString)
             }.sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
+           
             print(filteredTask)
         } else if indexPath.item == 1 {
             let filteredTask = realm.objects(TaskTable.self).where {
@@ -235,7 +236,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }.sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
         }
-        
+        vc.receivedTitleLabel = categoryList[indexPath.item]
         navigationController?.pushViewController(vc, animated: true)
         
     }

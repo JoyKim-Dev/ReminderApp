@@ -9,11 +9,13 @@ import UIKit
 
 import SnapKit
 import RealmSwift
+import Toast
 
 final class TaskListDetailViewController: BaseViewController {
     
     let realm = try! Realm()
     var addedTaskList: Results<TaskTable>!
+    var receivedTitleLabel = ""
     
     private var navPullDownBtn: UIBarButtonItem!
     private var navBackBtn: UIBarButtonItem!
@@ -48,7 +50,7 @@ final class TaskListDetailViewController: BaseViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(30)
-            make.width.equalTo(80)
+            make.width.equalTo(view.safeAreaLayoutGuide)
         }
         
         tableView.snp.makeConstraints { make in
@@ -59,11 +61,9 @@ final class TaskListDetailViewController: BaseViewController {
     
     override func configView() {
         
-        titleLabel.text = "전체"
+        titleLabel.text = receivedTitleLabel
         titleLabel.font = Font.heavy30
         titleLabel.textColor = Color.orange
-        
-        tableView.backgroundColor = .orange
         tableView.rowHeight = 120
         
     }
@@ -127,9 +127,6 @@ extension TaskListDetailViewController {
     @objc func dateChanged() {
         
     }
-    
-    
-    
 }
 
 extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -148,20 +145,38 @@ extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let deleteCell = UIContextualAction(style: .destructive, title: "삭제") { action, view, completionHandler in
+        let deleteCell = UIContextualAction(style: .destructive, title: "삭제") { delete, view, completionHandler in
             
             try! self.realm.write{
                 self.realm.delete(self.addedTaskList[indexPath.item])
                 print("삭제완료")
             }
-            tableView.reloadData()
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            completionHandler(true)
         }
         
-        return UISwipeActionsConfiguration(actions: [deleteCell])
+        let markFlagCell = UIContextualAction(style: .normal, title: "깃발") { markFlag, view, completionHander in
+            
+            try! self.realm.write{
+                let task = self.addedTaskList[indexPath.row]
+                task.flagMarked.toggle()
+                tableView.reloadData()
+            }
+            self.view.makeToast("깃발 설정이 변경되었습니다")
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            completionHander(true)
+        }
+            
+            let configuration = UISwipeActionsConfiguration(actions: [deleteCell, markFlagCell])
+        configuration.performsFirstActionWithFullSwipe = false
+        return configuration
     }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let vc = TaskDetailViewController()
+            
+            vc.list = addedTaskList[indexPath.row]
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = TaskDetailViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }

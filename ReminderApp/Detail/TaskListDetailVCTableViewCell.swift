@@ -89,8 +89,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         
         dateLabel.text = data.dueDate
         tagLabel.text = data.tag
-        tagLabel.textColor = .blue
-        
+        tagLabel.textColor = .blue  
     }
     
 }
