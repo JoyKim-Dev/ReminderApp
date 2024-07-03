@@ -65,7 +65,7 @@ final class TaskListDetailViewController: BaseViewController {
         titleLabel.textColor = Color.orange
         
         tableView.backgroundColor = .orange
-        tableView.rowHeight = 100
+        tableView.rowHeight = 120
         
     }
 }

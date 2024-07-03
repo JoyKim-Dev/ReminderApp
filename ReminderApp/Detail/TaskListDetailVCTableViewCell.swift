@@ -56,9 +56,8 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         }
         
         tagLabel.snp.makeConstraints { make in
-            make.top.equalTo(memoLabel.snp.bottom).offset(5)
-            make.leading.equalTo(dateLabel.snp.trailing).offset(10)
-            make.trailing.equalTo(contentView).inset(10)
+            make.top.equalTo(dateLabel.snp.bottom).offset(5)
+            make.leading.equalTo(checkBtn.snp.trailing).offset(10)
         }
         
      
@@ -73,6 +72,8 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         memoLabel.text = data.memoContent
         
         dateLabel.text = data.dueDate
+        tagLabel.text = data.tag
+        tagLabel.textColor = .blue
     }
     
 }

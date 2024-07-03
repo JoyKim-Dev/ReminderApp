@@ -11,8 +11,8 @@ import SnapKit
 
 final class DueDateViewController: BaseViewController {
     
-    let datePicker = UIDatePicker()
-    var dueDatePicked:((String) -> Void)?
+   private let datePicker = UIDatePicker()
+   var dueDatePicked:((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()

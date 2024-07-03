@@ -137,6 +137,7 @@ final class AddTaskViewController: BaseViewController {
         memoLabel.textColor = Color.lightGray
         
         dueDateBtn.addTarget(self, action: #selector(dueDateBtnTapped), for: .touchUpInside)
+        tagBtn.addTarget(self, action: #selector(tagBtnTapped), for: .touchUpInside)
         
     }
     
@@ -181,10 +182,11 @@ extension AddTaskViewController {
          
             return
         }
-        guard let date = dueDateBtn.label.text else {return}
         
+            guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text else {return}
+       
         
-        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: nil, priorityCheck: nil, image: nil)
+        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: tag, priorityCheck: nil, image: nil)
         navBackBtn.isEnabled = true
         
 //        저장 요청
@@ -211,7 +213,12 @@ extension AddTaskViewController {
         }
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    @objc func tagBtnTapped() {
+        
+        let vc = TagViewController()
+        vc.sendTag = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
     }
 
 extension AddTaskViewController: UITextFieldDelegate {
@@ -231,4 +238,14 @@ extension AddTaskViewController: UITextFieldDelegate {
     }
     }
     
+extension AddTaskViewController: PassDataDelegate {
+    func passDataValue(text: String) {
+        tagBtn.label.text = "#\(text)"
+        tagBtn.label.textColor = .blue
+        tagBtn.label.font = Font.semiBold15
+        print(text)
+    }
+    
+    
+}
 
