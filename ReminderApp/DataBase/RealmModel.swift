@@ -18,6 +18,8 @@ class TaskTable: Object {
     @Persisted var tag: String?
     @Persisted var priorityCheck: String?
     @Persisted var image: String?
+    @Persisted var flagMarked: Bool
+    @Persisted var taskFinished: Bool
     
     convenience init(taskTitle: String, memoContent: String?, dueDate: Date, tag: String?, priorityCheck: String?, image: String?) {
        self.init()
@@ -27,6 +29,8 @@ class TaskTable: Object {
         self.tag = tag
         self.priorityCheck = priorityCheck
         self.image = image
+        self.flagMarked = false
+        self.taskFinished = false
    }
 }
 

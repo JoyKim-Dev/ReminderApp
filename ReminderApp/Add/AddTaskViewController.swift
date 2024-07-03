@@ -23,10 +23,12 @@ final class AddTaskViewController: BaseViewController {
     private let lineView = UIView()
     private let memoLabel = UILabel()
      private let memoTextView = UITextView()
-    private var dueDateBtn = UIButton.Configuration.addTaskButton(title: "마감일")
-    private let tagBtn = UIButton.Configuration.addTaskButton(title: "태그")
-    private let priorityBtn = UIButton.Configuration.addTaskButton(title: "우선순위")
-    private let addImageBtn = UIButton.Configuration.addTaskButton(title: "이미지추가")
+    private var dueDateBtn = LabelButton(title: "마감일")
+    private var tagBtn = LabelButton(title: "태그")
+    private var priorityBtn = LabelButton(title: "우선 순위")
+    private var addImageBtn = LabelButton(title: "이미지 추가")
+
+    private let btnLabel = UILabel()
 
     
     override func viewDidLoad() {
@@ -50,6 +52,7 @@ final class AddTaskViewController: BaseViewController {
         view.addSubview(tagBtn)
         view.addSubview(priorityBtn)
         view.addSubview(addImageBtn)
+        view.addSubview(btnLabel)
     }
     
     override func configLayout() {
@@ -93,25 +96,29 @@ final class AddTaskViewController: BaseViewController {
         dueDateBtn.snp.makeConstraints { make in
             make.top.equalTo(taskView.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
            
         }
+        
         
         tagBtn.snp.makeConstraints { make in
             make.top.equalTo(dueDateBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
            
         }
         
         priorityBtn.snp.makeConstraints { make in
             make.top.equalTo(tagBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.height.equalTo(50)
            
         }
         
         addImageBtn.snp.makeConstraints { make in
             make.top.equalTo(priorityBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
-           
+            make.height.equalTo(50)
         }
     }
     
@@ -128,6 +135,7 @@ final class AddTaskViewController: BaseViewController {
         titleLabel.textColor = Color.lightGray
         memoLabel.text = "메모"
         memoLabel.textColor = Color.lightGray
+        
     }
 }
 
@@ -208,134 +216,4 @@ extension AddTaskViewController: UITextFieldDelegate {
     }
     }
     
-
-
-
-//final class AddTaskViewController: BaseViewController {
-//    
-//    private let tableView = UITableView()
-//    var navBackBtn: UIBarButtonItem!
-//    var navSaveBtn: UIBarButtonItem!
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        navigationItem.title = "새로운 할 일"
-//        setupNavSaveBtn()
-//        setupNavBackBtn()
-//        
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(AddTaskVCTableViewCell.self, forCellReuseIdentifier: AddTaskVCTableViewCell.identifier)
-//        tableView.register(AddTaskVCTableViewCellTitleMemo.self, forCellReuseIdentifier: AddTaskVCTableViewCellTitleMemo.identifier)
-//    }
-//    
-//    override func configHierarchy() {
-//        view.addSubview(tableView)
-//    }
-//    
-//    override func configLayout() {
-//        tableView.snp.makeConstraints { make in
-//            make.edges.equalTo(view.safeAreaLayoutGuide).inset(10)
-//        }
-//    }
-//    
-//    override func configView() {
-//
-//    }
-//}
-//
-//extension AddTaskViewController {
-//    
-//    private func setupNavBackBtn() {
-//        
-//        navBackBtn = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(navBackBtnTapped))
-//        
-//        navigationItem.leftBarButtonItem = navBackBtn
-//        
-//    }
-//    
-//    @objc func navBackBtnTapped() {
-//        dismiss(animated: true)
-//    }
-//    
-//    private func setupNavSaveBtn() {
-//        
-//        navSaveBtn = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(navSaveBtnTapped))
-//        
-//        navigationItem.rightBarButtonItem = navSaveBtn
-//    }
-//    // DB에 데이터 저장!
-//    @objc func navSaveBtnTapped() {
-//        print(#function)
-////        빈칸찾기
-//        let realm = try! Realm()
-//        
-////        내용 채우기
-//        
-//        guard let taskTitle =
-//        
-////        저장 요청
-//
-//
-//
-//    }
-//}
-//
-//extension AddTaskViewController:UITableViewDelegate, UITableViewDataSource {
-//
-//    
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        5
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//        if indexPath.section == 0 {
-//            return 250
-//        } else {
-//            return 50
-//        }
-//        
-//    }
-//    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        
-//        let headerView = UIView()
-//        
-//        headerView.backgroundColor = view.backgroundColor
-//        
-//        return headerView
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 5
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        
-//        return 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.section == 0 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: AddTaskVCTableViewCellTitleMemo.identifier, for: indexPath) as! AddTaskVCTableViewCellTitleMemo
-//            
-//            cell.layer.cornerRadius = 10
-//            cell.clipsToBounds = true
-//            
-//            return cell
-//        } else {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: AddTaskVCTableViewCell.identifier, for: indexPath) as! AddTaskVCTableViewCell
-//            
-//            cell.layer.cornerRadius = 10
-//            cell.clipsToBounds = true
-//            cell.configUI(section: indexPath.section)
-//            
-//            return cell
-//            
-//        }
-//        
-//    }
-//}
 

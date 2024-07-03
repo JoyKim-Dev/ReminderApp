@@ -27,6 +27,7 @@
 		356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */; };
 		3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50F2C343E2E0093A00F /* RealmModel.swift */; };
 		3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */; };
+		35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3432C352D2E001FACC3 /* LabelButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailVCTableViewCell.swift; sourceTree = "<group>"; };
 		3586C50F2C343E2E0093A00F /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration + Extension.swift"; sourceTree = "<group>"; };
+		35F6B3432C352D2E001FACC3 /* LabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				356EF7042C33F1FC0053974F /* BaseTableViewCell.swift */,
 				356EF6E82C33E5860053974F /* BaseViewController.swift */,
 				356EF7012C33F1C70053974F /* BaseCollectionViewCell.swift */,
+				35F6B3432C352D2E001FACC3 /* LabelButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				356EF6EB2C33E5BD0053974F /* HomeViewController.swift in Sources */,
 				356EF6F72C33EEA20053974F /* ImageResource.swift in Sources */,
 				356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */,
+				35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */,
 				356EF6D92C33E3B30053974F /* ViewController.swift in Sources */,
 				356EF7002C33F1A10053974F /* HomeViewCollectionViewCell.swift in Sources */,
 				356EF6E92C33E5860053974F /* BaseViewController.swift in Sources */,

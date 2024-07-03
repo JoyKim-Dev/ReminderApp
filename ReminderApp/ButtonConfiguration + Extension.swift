@@ -19,7 +19,6 @@ extension UIButton.Configuration {
         configuration.buttonSize = .large
         configuration.titleAlignment = .leading
         configuration.imagePlacement = .trailing
-      configuration.imagePadding = 250
         configuration.image = UIImage(systemName: "chevron.right")
         let button = UIButton(configuration: configuration, primaryAction: nil)
         return button
