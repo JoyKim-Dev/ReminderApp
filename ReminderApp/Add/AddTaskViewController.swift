@@ -33,6 +33,7 @@ final class AddTaskViewController: BaseViewController {
         super.viewDidLoad()
         
         navigationItem.title = "새로운 할 일"
+        titleTextField.delegate = self
         setupNavSaveBtn()
         setupNavBackBtn()
         
@@ -165,10 +166,13 @@ extension AddTaskViewController {
             let ok = UIAlertAction(title: "확인", style: .default)
             alert.addAction(ok)
             present(alert, animated: true)
+            
+         
             return
         }
         
         newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: Date(), tag: nil, priorityCheck: nil, image: nil)
+        navBackBtn.isEnabled = true
         
 //        저장 요청
         guard let data = newTaskData else {
@@ -186,6 +190,25 @@ extension AddTaskViewController {
         }
 
     }
+
+extension AddTaskViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if ((titleTextField.text?.isEmpty) != nil) {
+            navSaveBtn.isEnabled = false
+        }
+        }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if titleTextField.text != nil {
+            navSaveBtn.isEnabled = true
+            
+        }
+        return true
+    }
+    }
+    
+
 
 
 //final class AddTaskViewController: BaseViewController {
