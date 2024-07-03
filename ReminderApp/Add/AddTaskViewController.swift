@@ -184,10 +184,10 @@ extension AddTaskViewController {
             return
         }
         
-        guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text else {return}
+        guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text , let priority = priorityBtn.label.text else {return}
         
         
-        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: tag, priorityCheck: nil, image: nil)
+        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: tag, priorityCheck: priority, image: nil)
         navBackBtn.isEnabled = true
         
         //        저장 요청

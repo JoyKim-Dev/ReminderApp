@@ -15,7 +15,7 @@ final class HomeViewCollectionViewCell:BaseCollectionViewCell {
    private let categoryLabel = UILabel()
    private let listCountLabel = UILabel()
     
-    let categoryList = ["오늘", "예정", "전체", "깃발표시", "완료됨"]
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,11 +42,12 @@ final class HomeViewCollectionViewCell:BaseCollectionViewCell {
         
         listCountLabel.snp.makeConstraints { make in
             make.top.trailing.equalTo(contentView.safeAreaLayoutGuide).inset(10)
-            make.width.height.equalTo(30)
+            make.width.equalTo(70)
+            make.height.equalTo(30)
         }
     }
     
-    func configUI(count:Int, row: Int) {
+    func configUI(title: String, count:Int, row: Int) {
          super.configUI()
         backgroundColor = .darkGray
         imageView.image = UIImage(systemName: "heart")
@@ -54,11 +55,12 @@ final class HomeViewCollectionViewCell:BaseCollectionViewCell {
         
         categoryLabel.textColor = Color.white
         
-        categoryLabel.text = categoryList[row]
+        categoryLabel.text = title
 
         listCountLabel.text = String(count)
         listCountLabel.font = Font.heavy30
         listCountLabel.textColor = Color.white
+        listCountLabel.textAlignment = .right
         
         
     }

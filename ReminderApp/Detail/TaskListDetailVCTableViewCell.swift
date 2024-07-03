@@ -16,7 +16,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
     let memoLabel = UILabel()
     let dateLabel = UILabel()
     let tagLabel = UILabel()
-   
+    
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -60,7 +60,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
             make.leading.equalTo(checkBtn.snp.trailing).offset(10)
         }
         
-     
+        
     }
     
     func configUI(data: TaskTable) {
@@ -68,12 +68,29 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         checkBtn.setImage(UIImage(systemName: "circle"), for: .normal)
         checkBtn.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
         
-        titleLabel.text = data.taskTitle
+        if let priority = data.priorityCheck, !priority.isEmpty {
+            
+            switch priority {
+            case "높음":
+                titleLabel.text = "!!! \(data.taskTitle)"
+            case "보통":
+                titleLabel.text = "!! \(data.taskTitle)"
+            case "낮음":
+                titleLabel.text = "! \(data.taskTitle)"
+            default:
+                break
+            }
+        } else {
+            
+            titleLabel.text = data.taskTitle
+        }
+        
         memoLabel.text = data.memoContent
         
         dateLabel.text = data.dueDate
         tagLabel.text = data.tag
         tagLabel.textColor = .blue
+        
     }
     
 }

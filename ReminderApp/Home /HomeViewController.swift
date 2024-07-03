@@ -16,7 +16,7 @@ final class HomeViewController: BaseViewController {
    private var addCategoryBtn: UIBarButtonItem!
    private var navPullDownBtn: UIBarButtonItem!
 
-    
+    var categoryList = ["오늘", "예정", "전체", "깃발표시", "완료됨"]
    private let titleLabel = UILabel()
    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
@@ -156,17 +156,86 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
-      
-        let count = realm.objects(TaskTable.self).count
         
-        cell.configUI(count: count, row: indexPath.row)
+        let data = categoryList[indexPath.item]
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let dateString = dateFormatter.string(from: Date())
+        print(dateString)
+        
+        let realm = try! Realm()
+        if indexPath.item == 0 {
+            let count = realm.objects(TaskTable.self).where {
+                $0.dueDate.contains(dateString)
+            }.count
+            print(count)
+            cell.configUI(title: data,count: count, row: indexPath.row)
+        } else if indexPath.item == 1 {
+            let count = realm.objects(TaskTable.self).where {
+                !$0.dueDate.contains(dateString) && $0.dueDate != nil
+             }.count
+            print(count)
+             cell.configUI(title: data,count: count, row: indexPath.row)
+        } else if indexPath.item == 2 {
+            let count = realm.objects(TaskTable.self).count
+            cell.configUI(title: data,count: count, row: indexPath.row)
+        } else if indexPath.item == 3 {
+            let count = realm.objects(TaskTable.self).where {
+                $0.flagMarked == true
+            }.count
+            print(count)
+            cell.configUI(title: data,count: count, row: indexPath.row)
+        } else if indexPath.item == 4 {
+            let count = realm.objects(TaskTable.self).where {
+                $0.taskFinished == true
+            }.count
+            print(count)
+            cell.configUI(title: data,count: count, row: indexPath.row)
+        }
         
         return cell
+   
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+    
       let vc = TaskListDetailViewController()
+       
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let dateString = dateFormatter.string(from: Date())
+        print(dateString)
+        
+        let realm = try! Realm()
+        if indexPath.item == 0 {
+            let filteredTask = realm.objects(TaskTable.self).where {
+                $0.dueDate.contains(dateString)
+            }.sorted(byKeyPath: "taskTitle", ascending: true)
+            vc.addedTaskList = filteredTask
+            print(filteredTask)
+        } else if indexPath.item == 1 {
+            let filteredTask = realm.objects(TaskTable.self).where {
+                !$0.dueDate.contains(dateString) && $0.dueDate != nil
+             }.sorted(byKeyPath: "taskTitle", ascending: true)
+            vc.addedTaskList = filteredTask
+        } else if indexPath.item == 2 {
+            let filteredTask = realm.objects(TaskTable.self).sorted(byKeyPath: "taskTitle", ascending: true)
+            vc.addedTaskList = filteredTask
+        } else if indexPath.item == 3 {
+            let filteredTask = realm.objects(TaskTable.self).where {
+                $0.flagMarked == true
+            }.sorted(byKeyPath: "taskTitle", ascending: true)
+            vc.addedTaskList = filteredTask
+        } else if indexPath.item == 4 {
+            let filteredTask = realm.objects(TaskTable.self).where {
+                $0.taskFinished == true
+            }.sorted(byKeyPath: "taskTitle", ascending: true)
+            vc.addedTaskList = filteredTask
+        }
+        
         navigationController?.pushViewController(vc, animated: true)
         
     }

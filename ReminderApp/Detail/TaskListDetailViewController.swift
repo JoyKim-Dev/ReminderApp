@@ -29,8 +29,7 @@ final class TaskListDetailViewController: BaseViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(TaskListDetailVCTableViewCell.self, forCellReuseIdentifier: TaskListDetailVCTableViewCell.identifier)
-        
-        addedTaskList = realm.objects(TaskTable.self).sorted(byKeyPath: "dueDate", ascending: true)
+        print(addedTaskList.count)
         
         print(realm.configuration.fileURL)
     }
@@ -93,7 +92,7 @@ extension TaskListDetailViewController {
         let lowPriorityOnlyFilter = UIAction(title: "우선순위 낮음만") { _ in
             print("우선순위낮음만")
             self.addedTaskList = self.realm.objects(TaskTable.self).where{
-                $0.priorityCheck == "low"
+                $0.priorityCheck == "낮음"
             }.sorted(byKeyPath: "taskTitle", ascending: true)
             self.tableView.reloadData()
         }
@@ -135,6 +134,7 @@ extension TaskListDetailViewController {
 
 extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(addedTaskList.count)
         return addedTaskList.count
     }
     
