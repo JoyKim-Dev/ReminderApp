@@ -90,7 +90,15 @@ class TaskDetailViewController: BaseViewController {
         flagPriorityDuedateStackView.spacing = 5
         flagPriorityDuedateStackView.backgroundColor = Color.orange.withAlphaComponent(0.5)
         
-        dueDateLabel.text = "마감기한: \(list?.dueDate ?? "")"
+        func dateToString(date: Date) -> String {
+                let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                    return dateFormatter.string(from: date)
+                }
+        let stringDate = dateToString(date: list?.dueDate ?? Date())
+        
+        dueDateLabel.text = "마감기한: \(stringDate)"
         priorityLabel.text = "중요도: \(list?.priorityCheck ?? "")"
         
         guard let flag = list?.flagMarked else {return}
@@ -104,11 +112,12 @@ class TaskDetailViewController: BaseViewController {
         taskImageView.image = UIImage(systemName: "star")
         taskImageView.contentMode = .scaleAspectFit
         
+        taskImageView.backgroundColor = .systemRed
+        
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = Color.orange
         configuration.baseForegroundColor = Color.white
         configuration.cornerStyle = .capsule
-        
         guard let finished = list?.taskFinished else {return}
         
         if finished {

@@ -14,14 +14,14 @@ class TaskTable: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted(indexed: true) var taskTitle: String
     @Persisted var memoContent: String?
-    @Persisted var dueDate: String?
+    @Persisted var dueDate: Date?
     @Persisted var tag: String?
     @Persisted var priorityCheck: String?
     @Persisted var image: String?
     @Persisted var flagMarked: Bool
     @Persisted var taskFinished: Bool
     
-    convenience init(taskTitle: String, memoContent: String?, dueDate: String?, tag: String?, priorityCheck: String?, image: String?) {
+    convenience init(taskTitle: String, memoContent: String?, dueDate: Date?, tag: String?, priorityCheck: String?, image: String?) {
        self.init()
        self.taskTitle = taskTitle
         self.memoContent = memoContent

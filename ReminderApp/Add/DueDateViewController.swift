@@ -12,7 +12,7 @@ import SnapKit
 final class DueDateViewController: BaseViewController {
     
    private let datePicker = UIDatePicker()
-   var dueDatePicked:((String) -> Void)?
+   var dueDatePicked:((Date) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ final class DueDateViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        dueDatePicked?(dateToString())
+        dueDatePicked?(datePicker.date)
         
     }
     
@@ -40,12 +40,12 @@ final class DueDateViewController: BaseViewController {
         datePicker.preferredDatePickerStyle = .inline
     }
     
-    func dateToString() -> String {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy.MM.dd EEEE"
-        let dateString = dateFormatter.string(from: datePicker.date)
-        return dateString
-    }
+//    func dateToString() -> String {
+//        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale(identifier: "ko_KR")
+//        dateFormatter.dateFormat = "yyyy.MM.dd EEEE"
+//        let dateString = dateFormatter.string(from: datePicker.date)
+//        return dateString
+//    }
 }

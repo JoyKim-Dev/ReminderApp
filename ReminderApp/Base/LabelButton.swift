@@ -17,7 +17,7 @@ class LabelButton: UIButton {
         super.init(frame: .zero)
     
         setTitle(title, for: .normal)
-        backgroundColor = Color.mediumGray
+        backgroundColor = Color.orange
         layer.cornerRadius = 10
         tintColor = Color.white
         let screenWidth = UIScreen.main.bounds.width

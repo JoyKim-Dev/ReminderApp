@@ -143,6 +143,12 @@ extension HomeViewController {
         
         
     }
+    
+    func dateToString(date: Date) -> String {
+           let dateFormatter = DateFormatter()
+               dateFormatter.dateFormat = "yyyy-MM-dd"
+               return dateFormatter.string(from: date)
+           }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -156,24 +162,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
+
         
         let data = categoryList[indexPath.item]
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let dateString = dateFormatter.string(from: Date())
-        print(dateString)
+        
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
+        let tomorrow = calendar.date(byAdding: .day, value: +1, to: Date())
+        print(yesterday!)
         
         let realm = try! Realm()
         if indexPath.item == 0 {
             let count = realm.objects(TaskTable.self).where {
-                $0.dueDate.contains(dateString)
+             
+                $0.dueDate > yesterday && $0.dueDate < tomorrow
+    
             }.count
             print(count)
             cell.configUI(title: data,count: count, row: indexPath.row)
         } else if indexPath.item == 1 {
             let count = realm.objects(TaskTable.self).where {
-                !$0.dueDate.contains(dateString) && $0.dueDate != nil
+                $0.dueDate > Date()
              }.count
             print(count)
              cell.configUI(title: data,count: count, row: indexPath.row)
@@ -199,7 +208,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+       
+        let data = categoryList[indexPath.item]
+        let calendar = Calendar.current
+        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
+        let tomorrow = calendar.date(byAdding: .day, value: +1, to: Date())
+        print(yesterday!)
     
       let vc = TaskListDetailViewController()
        
@@ -209,17 +223,39 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let dateString = dateFormatter.string(from: Date())
         print(dateString)
         
+       
+        
         let realm = try! Realm()
         if indexPath.item == 0 {
             let filteredTask = realm.objects(TaskTable.self).where {
-                $0.dueDate.contains(dateString)
+                $0.dueDate > yesterday && $0.dueDate < tomorrow
             }.sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
+            
            
             print(filteredTask)
+            // Date가 compare 연산이 되는지? -> Comparable 프로토콜
         } else if indexPath.item == 1 {
+//            let filteredTask = realm.objects(TaskTable.self).filter {
+//                if let dueDate = $0.dueDate {
+//                    let taskDate = DateFormatter().date(from: dueDate)
+//                    
+//                    return Date() > taskDate!
+//                } else {
+//                    return false
+//                }
+//            }
             let filteredTask = realm.objects(TaskTable.self).where {
-                !$0.dueDate.contains(dateString) && $0.dueDate != nil
+               // !$0.dueDate.contains(dateString)
+//                var stringtoDate = DateFormatter()
+//                stringtoDate.dateFormat = "dd MMM yyyy HH:mm:ss Z"
+//                let taskDate:Date = stringtoDate.date(from: $0.dueDate)
+//                Date().dateCompare(fromDate: taskDate)
+                
+                
+//                && $0.dueDate == ""
+                
+                $0.dueDate > Date()
              }.sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
         } else if indexPath.item == 2 {

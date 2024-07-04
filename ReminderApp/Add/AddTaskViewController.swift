@@ -16,6 +16,7 @@ final class AddTaskViewController: BaseViewController {
     var navSaveBtn: UIBarButtonItem!
     
     var newTaskData:TaskTable?
+    var dateFromPicker = Date()
     
     private let taskView = UIView()
     private let titleLabel = UILabel()
@@ -125,18 +126,18 @@ final class AddTaskViewController: BaseViewController {
     }
     
     override func configView() {
-        taskView.backgroundColor = Color.mediumGray
+        taskView.backgroundColor = Color.orange
         taskView.layer.cornerRadius = 10
         taskView.clipsToBounds = true
-        memoTextView.backgroundColor = Color.mediumGray
+        memoTextView.backgroundColor = Color.orange
         memoTextView.font = Font.semiBold14
         
         lineView.backgroundColor = Color.lightGray
         
         titleLabel.text = "제목"
-        titleLabel.textColor = Color.lightGray
+        titleLabel.textColor = Color.white
         memoLabel.text = "메모"
-        memoLabel.textColor = Color.lightGray
+        memoLabel.textColor = Color.white
         
         dueDateBtn.addTarget(self, action: #selector(dueDateBtnTapped), for: .touchUpInside)
         tagBtn.addTarget(self, action: #selector(tagBtnTapped), for: .touchUpInside)
@@ -184,12 +185,11 @@ extension AddTaskViewController {
             return
         }
         
-        guard let date = dueDateBtn.label.text, let tag = tagBtn.label.text , let priority = priorityBtn.label.text else {return}
+        guard let tag = tagBtn.label.text , let priority = priorityBtn.label.text else {return}
         
-        
-        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: date, tag: tag, priorityCheck: priority, image: nil)
+        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: dateFromPicker, tag: tag, priorityCheck: priority, image: nil)
         navBackBtn.isEnabled = true
-        
+        print("저장날짜\(dateFromPicker)")
         //        저장 요청
         guard let data = newTaskData else {
             print("데이터값없음")
@@ -202,12 +202,22 @@ extension AddTaskViewController {
  
         dismiss(animated: true)
     }
+    func dateToString(date: Date) -> String {
+            let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                return dateFormatter.string(from: date)
+            }
+    
     @objc func dueDateBtnTapped() {
         
         let vc = DueDateViewController()
         vc.dueDatePicked = { value in
+ let changedDate = self.dateToString(date: value)
+            print(changedDate)
+            self.dateFromPicker = value
+            self.dueDateBtn.label.text = changedDate
             
-            self.dueDateBtn.label.text = value
         }
         navigationController?.pushViewController(vc, animated: true)
     }

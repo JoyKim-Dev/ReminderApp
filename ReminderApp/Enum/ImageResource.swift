@@ -19,3 +19,11 @@ enum Icon {
     static let likeUnSelected = UIImage(named: "like_unselected")!.withRenderingMode(.alwaysOriginal)
 }
 
+enum CellIcon:String {
+    
+    case today = "t.circle.fill"
+    case toDo = "calendar.circle.fill"
+    case all = "folder.circle.fill"
+    case flag = "flag.circle.fill"
+    case done = "checkmark.circle.fill"
+}

@@ -49,10 +49,24 @@ final class HomeViewCollectionViewCell:BaseCollectionViewCell {
     
     func configUI(title: String, count:Int, row: Int) {
          super.configUI()
-        backgroundColor = .darkGray
-        imageView.image = UIImage(systemName: "heart")
+        backgroundColor = Color.orange
         
-        
+        switch row {
+        case 0:
+            imageView.image = UIImage(systemName: CellIcon.today.rawValue)
+            
+        case 1:
+            imageView.image = UIImage(systemName: CellIcon.toDo.rawValue)
+        case 2:
+            imageView.image = UIImage(systemName: CellIcon.all.rawValue)
+        case 3:
+            imageView.image = UIImage(systemName: CellIcon.flag.rawValue)
+        case 4:
+            imageView.image = UIImage(systemName: CellIcon.done.rawValue)
+        default:
+            break
+        }
+        imageView.tintColor = Color.white
         categoryLabel.textColor = Color.white
         
         categoryLabel.text = title

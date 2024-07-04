@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		355D58C52C3645FC002E7DC6 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 356EF6ED2C33ED880053974F /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		355D58CC2C3694D0002E7DC6 /* TaskTableRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 355D58CB2C3694D0002E7DC6 /* TaskTableRepository.swift */; };
 		356EF6D52C33E3B30053974F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF6D42C33E3B30053974F /* AppDelegate.swift */; };
 		356EF6D72C33E3B30053974F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF6D62C33E3B30053974F /* SceneDelegate.swift */; };
 		356EF6D92C33E3B30053974F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF6D82C33E3B30053974F /* ViewController.swift */; };
@@ -37,7 +39,22 @@
 		35F6B3542C358FC9001FACC3 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 35F6B3532C358FC9001FACC3 /* Toast */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		355D58C62C3645FC002E7DC6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				355D58C52C3645FC002E7DC6 /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		355D58CB2C3694D0002E7DC6 /* TaskTableRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableRepository.swift; sourceTree = "<group>"; };
 		356EF6D12C33E3B30053974F /* ReminderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReminderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		356EF6D42C33E3B30053974F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		356EF6D62C33E3B30053974F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				3586C50F2C343E2E0093A00F /* RealmModel.swift */,
+				355D58CB2C3694D0002E7DC6 /* TaskTableRepository.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -196,6 +214,7 @@
 				356EF6CD2C33E3B30053974F /* Sources */,
 				356EF6CE2C33E3B30053974F /* Frameworks */,
 				356EF6CF2C33E3B30053974F /* Resources */,
+				355D58C62C3645FC002E7DC6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,6 +292,7 @@
 				35F6B34A2C3534A8001FACC3 /* PriorityViewController.swift in Sources */,
 				356EF6D92C33E3B30053974F /* ViewController.swift in Sources */,
 				35F6B34F2C35451A001FACC3 /* TaskDetailViewController.swift in Sources */,
+				355D58CC2C3694D0002E7DC6 /* TaskTableRepository.swift in Sources */,
 				35F6B3462C35348A001FACC3 /* DueDateViewController.swift in Sources */,
 				356EF7002C33F1A10053974F /* HomeViewCollectionViewCell.swift in Sources */,
 				356EF6E92C33E5860053974F /* BaseViewController.swift in Sources */,

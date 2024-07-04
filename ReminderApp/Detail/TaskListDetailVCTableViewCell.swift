@@ -87,7 +87,18 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         
         memoLabel.text = data.memoContent
         
-        dateLabel.text = data.dueDate
+        // text에 넣기 위해 Date -> String 변경 작업
+        
+        func dateToString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+            return dateFormatter.string(from: date)
+        }
+        
+        guard let date = data.dueDate else {return}
+        
+        dateLabel.text = dateToString(date: date)
         tagLabel.text = data.tag
         tagLabel.textColor = .blue  
     }
