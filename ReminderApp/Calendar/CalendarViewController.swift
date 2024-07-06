@@ -40,8 +40,7 @@ final class CalendarViewController: BaseViewController {
     override func configView() {
         navigationItem.title = "CALENDAR"
         
-        
-        calendar.locale = Locale(identifier: "ko_KR")
+
         calendar.scrollEnabled = true
         calendar.scrollDirection = .vertical
         
@@ -79,11 +78,12 @@ extension CalendarViewController: FSCalendarDelegate, FSCalendarDataSource, FSCa
         
         let realm = try! Realm()
         
-        let startOfDay = Calendar.current.startOfDay(for: date)
+        var calendar = Calendar.current
+                let startOfDay = calendar.startOfDay(for: date)
+                guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else { return }
         
-        let endOfDay = Calendar.current.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
         
-        let predicate = NSPredicate(format: "dueDate >= %@ AND dueDate < %@", startOfDay as NSDate, endOfDay! as NSDate)
+        let predicate = NSPredicate(format: "dueDate >= %@ AND dueDate < %@", startOfDay as NSDate, endOfDay as NSDate)
         let filteredTask = realm.objects(TaskTable.self).filter(predicate).sorted(byKeyPath: "taskTitle", ascending: true)
         
         

@@ -228,11 +228,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let vc = TaskListDetailViewController()
         
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "ko_KR")
-//        dateFormatter.dateFormat = "yyyy.MM.dd"
-//        let dateString = dateFormatter.string(from: Date())
-//        print(dateString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let dateString = dateFormatter.string(from: Date())
+        print(dateString)
         
         let realm = try! Realm()
         if indexPath.item == 0 {

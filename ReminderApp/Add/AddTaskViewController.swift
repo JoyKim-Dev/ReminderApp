@@ -226,6 +226,7 @@ extension AddTaskViewController {
         
         let vc = DueDateViewController()
         vc.dueDatePicked = { value in
+            print(value)
             let changedDate = self.dateToString(date: value)
             print(changedDate)
             self.dateFromPicker = value
@@ -279,9 +280,7 @@ extension AddTaskViewController {
                 dateFormatter.timeZone = TimeZone(identifier: "UTC")
                 return dateFormatter.string(from: date)
             }
-  
 }
-
 
 extension AddTaskViewController: UITextFieldDelegate {
     

@@ -22,8 +22,12 @@ final class DueDateViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        dueDatePicked?(datePicker.date)
-        
+        let selectedDate = datePicker.date
+        let localTimeZone = TimeZone.current
+        print(selectedDate)
+        let convertedDate = selectedDate.addingTimeInterval(TimeInterval(localTimeZone.secondsFromGMT(for: selectedDate)))
+        print (convertedDate)
+               dueDatePicked?(convertedDate)
     }
     
     override func configHierarchy() {
@@ -38,6 +42,10 @@ final class DueDateViewController: BaseViewController {
     
     override func configView() {
         datePicker.preferredDatePickerStyle = .inline
+        datePicker.timeZone = TimeZone(abbreviation: "KST")
+        datePicker.locale = Locale(identifier: "ko_KR")
+        
+        
     }
     
 }
