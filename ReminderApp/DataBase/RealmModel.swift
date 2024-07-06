@@ -32,3 +32,28 @@ class TaskTable: Object {
    }
 }
 
+extension TaskTable {
+    
+    func isSameDay(today:Date, compareWith:Date) -> Bool {
+        
+        let today = today
+        let compareDate = compareWith
+        
+        
+        let calendar = Calendar.current
+        
+        
+        let componentsOfToday = calendar.dateComponents([.year, .month, .day], from: today)
+        let componentsOfOtherDay = calendar.dateComponents([.year, .month, .day], from: compareDate)
+        
+        
+        if componentsOfToday.year == componentsOfOtherDay.year &&
+            componentsOfToday.month == componentsOfOtherDay.month &&
+            componentsOfToday.day == componentsOfOtherDay.day {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+

@@ -12,13 +12,14 @@ import RealmSwift
 
 final class HomeViewController: BaseViewController {
     let realm = try! Realm()
-   private var addTaskBtn: UIBarButtonItem!
-   private var addCategoryBtn: UIBarButtonItem!
-   private var navPullDownBtn: UIBarButtonItem!
-
+    private var addTaskBtn: UIBarButtonItem!
+    private var addCategoryBtn: UIBarButtonItem!
+    private var navPullDownBtn: UIBarButtonItem!
+    private var navCalendarBtn: UIBarButtonItem!
+    
     var categoryList = ["오늘", "예정", "전체", "깃발표시", "완료됨"]
-   private let titleLabel = UILabel()
-   private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
+    private let titleLabel = UILabel()
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ final class HomeViewController: BaseViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(HomeViewCollectionViewCell.self, forCellWithReuseIdentifier: HomeViewCollectionViewCell.identifier)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,9 +102,13 @@ extension HomeViewController {
         let menu = UIMenu(title: "필터 옵션", options: .displayInline, children: [dueDateOrderFilter,titleOrderFilter,lowPriorityOnlyFilter])
         
         navPullDownBtn.menu = menu
-      //  navPullDownBtn.showsMenuAsPrimaryAction = true
-    
+        //  navPullDownBtn.showsMenuAsPrimaryAction = true
+        
         navigationItem.rightBarButtonItem = navPullDownBtn
+        
+        navCalendarBtn = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .plain, target: self, action: #selector(calendarBtnTapped))
+        navigationItem.leftBarButtonItem = navCalendarBtn
+        
     }
     
     func setupToolBar(){
@@ -131,12 +136,17 @@ extension HomeViewController {
         
     }
     
+    @objc func calendarBtnTapped() {
+        let vc = CalendarViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func addCategoryBtnTapped() {
         print(#function)
         
-//        let nav = UINavigationController(rootViewController: TaskListDetailViewController())
-//        nav.modalPresentationStyle = .fullScreen
-//        present(nav, animated: true)
+        //        let nav = UINavigationController(rootViewController: TaskListDetailViewController())
+        //        nav.modalPresentationStyle = .fullScreen
+        //        present(nav, animated: true)
     }
     
     @objc func dropDownNavBtnTapped() {
@@ -145,10 +155,10 @@ extension HomeViewController {
     }
     
     func dateToString(date: Date) -> String {
-           let dateFormatter = DateFormatter()
-               dateFormatter.dateFormat = "yyyy-MM-dd"
-               return dateFormatter.string(from: date)
-           }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -162,30 +172,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         cell.layer.cornerRadius = 10
         cell.clipsToBounds = true
-
+        
         
         let data = categoryList[indexPath.item]
         
         let calendar = Calendar.current
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
-        let tomorrow = calendar.date(byAdding: .day, value: +1, to: Date())
-        print(yesterday!)
+        let startOfDay = calendar.startOfDay(for: Date())
+        let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
+        let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay)
         
         let realm = try! Realm()
         if indexPath.item == 0 {
-            let count = realm.objects(TaskTable.self).where {
-             
-                $0.dueDate > yesterday && $0.dueDate < tomorrow
-    
-            }.count
+            
+            let predicate = NSPredicate(format: "dueDate >= %@ AND dueDate < %@", startOfDay as NSDate, endOfDay! as NSDate)
+            let count = realm.objects(TaskTable.self).filter(predicate).count
+            
             print(count)
             cell.configUI(title: data,count: count, row: indexPath.row)
         } else if indexPath.item == 1 {
-            let count = realm.objects(TaskTable.self).where {
-                $0.dueDate > Date()
-             }.count
-            print(count)
-             cell.configUI(title: data,count: count, row: indexPath.row)
+            let predicate = NSPredicate(format: "dueDate > %@", startOfTomorrow! as NSDate)
+                   let count = realm.objects(TaskTable.self).filter(predicate).count
+            cell.configUI(title: data,count: count, row: indexPath.row)
         } else if indexPath.item == 2 {
             let count = realm.objects(TaskTable.self).count
             cell.configUI(title: data,count: count, row: indexPath.row)
@@ -204,59 +211,41 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         return cell
-   
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-        let data = categoryList[indexPath.item]
-        let calendar = Calendar.current
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: Date())
-        let tomorrow = calendar.date(byAdding: .day, value: +1, to: Date())
-        print(yesterday!)
-    
-      let vc = TaskListDetailViewController()
-       
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy.MM.dd"
-        let dateString = dateFormatter.string(from: Date())
-        print(dateString)
         
-       
+        let data = categoryList[indexPath.item]
+      
+        let calendar = Calendar.current
+            
+        
+            let startOfDay = calendar.startOfDay(for: Date())
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
+            let startOfTomorrow = calendar.date(byAdding: .day, value: 1, to: startOfDay)
+               
+        
+        let vc = TaskListDetailViewController()
+        
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.locale = Locale(identifier: "ko_KR")
+//        dateFormatter.dateFormat = "yyyy.MM.dd"
+//        let dateString = dateFormatter.string(from: Date())
+//        print(dateString)
         
         let realm = try! Realm()
         if indexPath.item == 0 {
-            let filteredTask = realm.objects(TaskTable.self).where {
-                $0.dueDate > yesterday && $0.dueDate < tomorrow
-            }.sorted(byKeyPath: "taskTitle", ascending: true)
+            let predicate = NSPredicate(format: "dueDate >= %@ AND dueDate < %@", startOfDay as NSDate, endOfDay! as NSDate)
+                 let filteredTask = realm.objects(TaskTable.self).filter(predicate).sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
-            
-           
+       
             print(filteredTask)
             // Date가 compare 연산이 되는지? -> Comparable 프로토콜
         } else if indexPath.item == 1 {
-//            let filteredTask = realm.objects(TaskTable.self).filter {
-//                if let dueDate = $0.dueDate {
-//                    let taskDate = DateFormatter().date(from: dueDate)
-//                    
-//                    return Date() > taskDate!
-//                } else {
-//                    return false
-//                }
-//            }
-            let filteredTask = realm.objects(TaskTable.self).where {
-               // !$0.dueDate.contains(dateString)
-//                var stringtoDate = DateFormatter()
-//                stringtoDate.dateFormat = "dd MMM yyyy HH:mm:ss Z"
-//                let taskDate:Date = stringtoDate.date(from: $0.dueDate)
-//                Date().dateCompare(fromDate: taskDate)
-                
-                
-//                && $0.dueDate == ""
-                
-                $0.dueDate > Date()
-             }.sorted(byKeyPath: "taskTitle", ascending: true)
+   
+            let predicate = NSPredicate(format: "dueDate > %@", startOfTomorrow! as NSDate)
+                   let filteredTask = realm.objects(TaskTable.self).filter(predicate).sorted(byKeyPath: "taskTitle", ascending: true)
             vc.addedTaskList = filteredTask
         } else if indexPath.item == 2 {
             let filteredTask = realm.objects(TaskTable.self).sorted(byKeyPath: "taskTitle", ascending: true)

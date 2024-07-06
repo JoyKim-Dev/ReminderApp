@@ -60,7 +60,7 @@ final class TaskListDetailViewController: BaseViewController {
     }
     
     override func configView() {
-        
+        navigationItem.title = "할일목록"
         titleLabel.text = receivedTitleLabel
         titleLabel.font = Font.heavy30
         titleLabel.textColor = Color.orange

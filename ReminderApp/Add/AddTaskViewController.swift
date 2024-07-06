@@ -152,7 +152,6 @@ final class AddTaskViewController: BaseViewController {
         priorityBtn.addTarget(self, action: #selector(priorityBtnTapped), for: .touchUpInside)
         addImageBtn.addTarget(self, action: #selector(addImageBtnTapped), for: .touchUpInside)
         
-        imageView.backgroundColor = .gray
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFit
