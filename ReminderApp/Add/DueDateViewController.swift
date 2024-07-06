@@ -40,12 +40,4 @@ final class DueDateViewController: BaseViewController {
         datePicker.preferredDatePickerStyle = .inline
     }
     
-//    func dateToString() -> String {
-//        
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.locale = Locale(identifier: "ko_KR")
-//        dateFormatter.dateFormat = "yyyy.MM.dd EEEE"
-//        let dateString = dateFormatter.string(from: datePicker.date)
-//        return dateString
-//    }
 }

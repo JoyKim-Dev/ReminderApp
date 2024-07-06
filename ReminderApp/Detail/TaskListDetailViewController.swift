@@ -145,9 +145,10 @@ extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let deleteCell = UIContextualAction(style: .destructive, title: "삭제") { delete, view, completionHandler in
+        let deleteCell = UIContextualAction(style: .destructive, title: "삭제") { [self] delete, view, completionHandler in
             
             try! self.realm.write{
+                removeImageFromDocument(filename:"\(addedTaskList[indexPath.item].id)" )
                 self.realm.delete(self.addedTaskList[indexPath.item])
                 print("삭제완료")
             }

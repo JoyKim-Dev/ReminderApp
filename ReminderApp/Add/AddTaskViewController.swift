@@ -8,6 +8,7 @@ import UIKit
 
 import SnapKit
 import RealmSwift
+import PhotosUI
 
 
 final class AddTaskViewController: BaseViewController {
@@ -28,6 +29,7 @@ final class AddTaskViewController: BaseViewController {
     private var tagBtn = LabelButton(title: "태그")
     private var priorityBtn = LabelButton(title: "우선 순위")
     private var addImageBtn = LabelButton(title: "이미지 추가")
+    private var imageView = UIImageView()
     
     private let btnLabel = UILabel()
     
@@ -56,6 +58,7 @@ final class AddTaskViewController: BaseViewController {
         view.addSubview(priorityBtn)
         view.addSubview(addImageBtn)
         view.addSubview(btnLabel)
+        view.addSubview(imageView)
     }
     
     override func configLayout() {
@@ -103,7 +106,6 @@ final class AddTaskViewController: BaseViewController {
             
         }
         
-        
         tagBtn.snp.makeConstraints { make in
             make.top.equalTo(dueDateBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
@@ -122,6 +124,12 @@ final class AddTaskViewController: BaseViewController {
             make.top.equalTo(priorityBtn.snp.bottom).offset(10)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.height.equalTo(50)
+        }
+        
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(addImageBtn.snp.bottom).offset(10)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
     
@@ -142,6 +150,12 @@ final class AddTaskViewController: BaseViewController {
         dueDateBtn.addTarget(self, action: #selector(dueDateBtnTapped), for: .touchUpInside)
         tagBtn.addTarget(self, action: #selector(tagBtnTapped), for: .touchUpInside)
         priorityBtn.addTarget(self, action: #selector(priorityBtnTapped), for: .touchUpInside)
+        addImageBtn.addTarget(self, action: #selector(addImageBtnTapped), for: .touchUpInside)
+        
+        imageView.backgroundColor = .gray
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
         
     }
 }
@@ -187,9 +201,11 @@ extension AddTaskViewController {
         
         guard let tag = tagBtn.label.text , let priority = priorityBtn.label.text else {return}
         
-        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: dateFromPicker, tag: tag, priorityCheck: priority, image: nil)
+        newTaskData = TaskTable(taskTitle: title, memoContent: memoTextView.text, dueDate: dateFromPicker, tag: tag, priorityCheck: priority)
+        
+        
         navBackBtn.isEnabled = true
-        print("저장날짜\(dateFromPicker)")
+
         //        저장 요청
         guard let data = newTaskData else {
             print("데이터값없음")
@@ -199,21 +215,19 @@ extension AddTaskViewController {
             realm.add(data)
             print("저장완료")
         }
- 
+        
+        if let image = imageView.image {
+            saveImageToDocument(image: image, filename: "\(data.id)")
+        }
+        
         dismiss(animated: true)
     }
-    func dateToString(date: Date) -> String {
-            let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                dateFormatter.timeZone = TimeZone(identifier: "UTC")
-                return dateFormatter.string(from: date)
-            }
     
     @objc func dueDateBtnTapped() {
         
         let vc = DueDateViewController()
         vc.dueDatePicked = { value in
- let changedDate = self.dateToString(date: value)
+            let changedDate = self.dateToString(date: value)
             print(changedDate)
             self.dateFromPicker = value
             self.dueDateBtn.label.text = changedDate
@@ -228,9 +242,18 @@ extension AddTaskViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc func priorityBtnTapped() {
-
+        
         let vc = PriorityViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func addImageBtnTapped() {
+        print(#function)
+        
+        let picker = UIImagePickerController()
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+
     }
     
     @objc func priorityReceivedNotification(notification: NSNotification) {
@@ -250,6 +273,14 @@ extension AddTaskViewController {
             }
         }
     }
+   
+    func dateToString(date: Date) -> String {
+            let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                dateFormatter.timeZone = TimeZone(identifier: "UTC")
+                return dateFormatter.string(from: date)
+            }
+  
 }
 
 
@@ -281,7 +312,22 @@ extension AddTaskViewController: PassDataDelegate {
         tagBtn.label.font = Font.semiBold15
         print(text)
     }
+}
+
+extension AddTaskViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print(#function)
+        
+        if let image = info[.editedImage] as? UIImage {
+            imageView.image = image
+        }
+        
+        dismiss(animated: true)
+    }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
 }
 

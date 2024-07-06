@@ -16,6 +16,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
     let memoLabel = UILabel()
     let dateLabel = UILabel()
     let tagLabel = UILabel()
+    let cellImageView = UIImageView()
     
     
     
@@ -29,6 +30,7 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         contentView.addSubview(memoLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(tagLabel)
+        contentView.addSubview(cellImageView)
         
     }
     
@@ -58,6 +60,11 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         tagLabel.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(5)
             make.leading.equalTo(checkBtn.snp.trailing).offset(10)
+        }
+    
+        cellImageView.snp.makeConstraints { make in
+            make.top.trailing.bottom.equalTo(contentView.safeAreaLayoutGuide).inset(15)
+            make.width.equalTo(cellImageView.snp.height).multipliedBy(0.7)
         }
         
         
@@ -101,6 +108,10 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
         dateLabel.text = dateToString(date: date)
         tagLabel.text = data.tag
         tagLabel.textColor = .blue  
+        
+        cellImageView.image = loadImageToDocument(filename: "\(data.id)")
+        cellImageView.clipsToBounds = true
+        cellImageView.contentMode = .scaleAspectFit
     }
     
 }

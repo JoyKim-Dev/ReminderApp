@@ -109,10 +109,12 @@ class TaskDetailViewController: BaseViewController {
             flagImageView.image = UIImage(systemName: "flag")
         }
         
-        taskImageView.image = UIImage(systemName: "star")
+        guard let imageId = list?.id else {
+            taskImageView.image = UIImage(systemName: "star")
+            return 
+        }
+        taskImageView.image = loadImageToDocument(filename: "\(imageId)")
         taskImageView.contentMode = .scaleAspectFit
-        
-        taskImageView.backgroundColor = .systemRed
         
         var configuration = UIButton.Configuration.filled()
         configuration.baseBackgroundColor = Color.orange
