@@ -24,5 +24,10 @@ final class TaskTableRepository {
             print("Realm delete succeed")}
     }
     
-    
+    func taskFinished(_ data: TaskTable) {
+        
+        try! realm.write {
+            data.taskFinished.toggle()
+        }
+    } 
 }

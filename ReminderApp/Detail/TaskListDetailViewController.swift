@@ -14,6 +14,7 @@ import Toast
 final class TaskListDetailViewController: BaseViewController {
     
     let realm = try! Realm()
+    let repository = TaskTableRepository()
     var addedTaskList: Results<TaskTable>!
     var receivedTitleLabel = ""
     
@@ -127,6 +128,12 @@ extension TaskListDetailViewController {
     @objc func dateChanged() {
         
     }
+    
+    @objc func checkBtnTapped(sender: UIButton) {
+        let index = sender.tag
+        repository.taskFinished(addedTaskList[index])
+        tableView.reloadData()
+    }
 }
 
 extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -139,6 +146,8 @@ extension TaskListDetailViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: TaskListDetailVCTableViewCell.identifier, for: indexPath) as! TaskListDetailVCTableViewCell
         
         cell.configUI(data: addedTaskList[indexPath.item])
+        cell.checkBtn.tag = indexPath.row
+        cell.checkBtn.addTarget(self, action: #selector(checkBtnTapped), for: .touchUpInside)
         
         return cell
     }

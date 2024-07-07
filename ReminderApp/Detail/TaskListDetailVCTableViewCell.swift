@@ -72,9 +72,12 @@ final class TaskListDetailVCTableViewCell: BaseTableViewCell {
     
     func configUI(data: TaskTable) {
         super.configUI()
-        checkBtn.setImage(UIImage(systemName: "circle"), for: .normal)
-        checkBtn.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
-        
+        if data.taskFinished {
+            checkBtn.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        } else {
+            checkBtn.setImage(UIImage(systemName: "circle"), for: .normal)
+        }
+    
         if let priority = data.priorityCheck, !priority.isEmpty {
             
             switch priority {
