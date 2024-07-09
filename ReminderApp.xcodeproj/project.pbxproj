@@ -33,6 +33,8 @@
 		356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */; };
 		3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C50F2C343E2E0093A00F /* RealmModel.swift */; };
 		3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */; };
+		35D827062C3D307200342594 /* DueDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D827052C3D307200342594 /* DueDateViewModel.swift */; };
+		35D827082C3D30E700342594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D827072C3D30E700342594 /* Observable.swift */; };
 		35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3432C352D2E001FACC3 /* LabelButton.swift */; };
 		35F6B3462C35348A001FACC3 /* DueDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3452C35348A001FACC3 /* DueDateViewController.swift */; };
 		35F6B3482C353498001FACC3 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3472C353498001FACC3 /* TagViewController.swift */; };
@@ -82,6 +84,8 @@
 		356EF70A2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailVCTableViewCell.swift; sourceTree = "<group>"; };
 		3586C50F2C343E2E0093A00F /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration + Extension.swift"; sourceTree = "<group>"; };
+		35D827052C3D307200342594 /* DueDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateViewModel.swift; sourceTree = "<group>"; };
+		35D827072C3D30E700342594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		35F6B3432C352D2E001FACC3 /* LabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
 		35F6B3452C35348A001FACC3 /* DueDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateViewController.swift; sourceTree = "<group>"; };
 		35F6B3472C353498001FACC3 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				356EF6DF2C33E3B40053974F /* LaunchScreen.storyboard */,
 				356EF6E22C33E3B40053974F /* Info.plist */,
 				3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */,
+				35D827072C3D30E700342594 /* Observable.swift */,
 			);
 			path = ReminderApp;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 			children = (
 				356EF7062C33F7830053974F /* AddTaskViewController.swift */,
 				35F6B3452C35348A001FACC3 /* DueDateViewController.swift */,
+				35D827052C3D307200342594 /* DueDateViewModel.swift */,
 				35F6B3472C353498001FACC3 /* TagViewController.swift */,
 				35F6B3492C3534A8001FACC3 /* PriorityViewController.swift */,
 				355D58CD2C36AF88002E7DC6 /* AddImageViewController.swift */,
@@ -315,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				356EF6EB2C33E5BD0053974F /* HomeViewController.swift in Sources */,
+				35D827062C3D307200342594 /* DueDateViewModel.swift in Sources */,
 				356EF6F72C33EEA20053974F /* ImageResource.swift in Sources */,
 				356EF70B2C33F7E00053974F /* TaskListDetailVCTableViewCell.swift in Sources */,
 				35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */,
@@ -337,6 +344,7 @@
 				356EF6D52C33E3B30053974F /* AppDelegate.swift in Sources */,
 				3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */,
 				356EF7072C33F7830053974F /* AddTaskViewController.swift in Sources */,
+				35D827082C3D30E700342594 /* Observable.swift in Sources */,
 				3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */,
 				353B93E82C3992C4003EB716 /* CalendarViewController.swift in Sources */,
 				356EF6FE2C33F17C0053974F /* ReusableIdentifierProtocol.swift in Sources */,

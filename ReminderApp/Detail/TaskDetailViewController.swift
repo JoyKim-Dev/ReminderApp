@@ -31,10 +31,11 @@ class TaskDetailViewController: BaseViewController {
     
     override func configHierarchy() {
         view.addSubview(titletextField)
+        view.addSubview(flagPriorityDuedateStackView)
         view.addSubview(taskImageView)
         view.addSubview(memoContentTextView)
         view.addSubview(finishedTaskButton)
-        view.addSubview(flagPriorityDuedateStackView)
+        
         
         flagPriorityDuedateStackView.addArrangedSubview(dueDateLabel)
         flagPriorityDuedateStackView.addArrangedSubview(priorityLabel)
@@ -116,31 +117,29 @@ class TaskDetailViewController: BaseViewController {
         taskImageView.image = loadImageToDocument(filename: "\(imageId)")
         taskImageView.contentMode = .scaleAspectFit
         
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Color.orange
-        configuration.baseForegroundColor = Color.white
-        configuration.cornerStyle = .capsule
+//        var configuration = UIButton.Configuration.filled()
+//        configuration.baseBackgroundColor = Color.orange
+//        configuration.baseForegroundColor = Color.white
+//        configuration.cornerStyle = .capsule
         guard let finished = list?.taskFinished else {return}
         
         if finished {
             finishedTaskButton.setTitle("완료됨", for: .normal)
-            configuration.baseBackgroundColor = Color.unselectedGray
-            finishedTaskButton.isEnabled = false
+          //  configuration.baseBackgroundColor = Color.unselectedGray
+           // finishedTaskButton.isEnabled = false
         } else {
             finishedTaskButton.setTitle("완료", for: .normal)
 
-          configuration.baseBackgroundColor = Color.orange
-            finishedTaskButton.isEnabled = true
+         // configuration.baseBackgroundColor = Color.orange
+         //  finishedTaskButton.isEnabled = true
         }
         
-       finishedTaskButton.configuration = configuration
+     //  finishedTaskButton.configuration = configuration
+     //   finishedTaskButton.isUserInteractionEnabled = true
+        finishedTaskButton.backgroundColor = .lightGray
         finishedTaskButton.addTarget(self, action: #selector(finishedBtnTapped), for: .touchUpInside)
         print("여기")
     }
-  
-}
-// 왜 addTarget이 안될까!!
-extension TaskDetailViewController {
     
     @objc func finishedBtnTapped() {
         print(#function)
@@ -150,4 +149,6 @@ extension TaskDetailViewController {
             self.view.makeToast("완료 상태가 변경 되었습니다.")
         }
     }
+  
 }
+

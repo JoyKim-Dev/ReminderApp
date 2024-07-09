@@ -176,6 +176,17 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         let data = categoryList[indexPath.item]
         
+        // 2024-07-09-12:00
+        // 2024-07-09-17:03 Date()
+        // 2024-07-09-19:00
+        
+        // ==
+        // 2024-07-09
+        // 2024-07-09
+        // 2024-07-09
+        
+        // >
+        // 2024-07-10
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: Date())
         let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)?.addingTimeInterval(-1)
