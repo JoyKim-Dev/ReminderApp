@@ -31,13 +31,12 @@ final class DueDateViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-//        let selectedDate = datePicker.date
-//        let localTimeZone = TimeZone.current
-//        print(selectedDate)
-//        let convertedDate = selectedDate.addingTimeInterval(TimeInterval(localTimeZone.secondsFromGMT(for: selectedDate)))
-//        print (convertedDate)
-           //    dueDatePicked?(convertedDate)
+
+        print(#function)
+        if let convertedDate = viewModel.outputValidDate.value {
+            dueDatePicked?(convertedDate)
+            print(convertedDate)
+        }
     }
     
     override func configHierarchy() {

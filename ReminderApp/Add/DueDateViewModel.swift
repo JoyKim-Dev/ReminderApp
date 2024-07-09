@@ -12,38 +12,35 @@ final class DueDateViewModel {
     // input: datePicker.date
     
     var inputDate: Observable<Date?> = Observable(nil)
-    var outputValidDate = Observable(Date())
+    var outputValidDate: Observable<Date?> = Observable(nil)
     var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
     var outputLabelText = Observable("")
     
     init() {
         print("DateViewModel Init")
         inputDate.bind { _ in
-            self.dateToString()
+            self.updateDateWithValidTimezone()
+            self.updateDateLabel()
         }
         
-        outputValidDate.bind { _ in
-            self.dateTodate()
-        }
         // 오늘 날짜 바로 보여주기 위해 추가
         inputViewDidLoadTrigger.bind { _ in
             self.inputDate.value = Date()
-            self.dateToString()
+            self.updateDateLabel()
+            self.updateDateWithValidTimezone()
         }
     }
     
-    private func dateTodate() {
+    private func updateDateWithValidTimezone() {
         guard let date = inputDate.value else {return}
         
             let localTimeZone = TimeZone.current
             let convertedDate = date.addingTimeInterval(TimeInterval(localTimeZone.secondsFromGMT(for: date)))
         outputValidDate.value = convertedDate
-        
         }
     
     
-    private  func dateToString() {
-        
+    private  func updateDateLabel() {
         guard let date = inputDate.value else {return}
         
             let localTimeZone = TimeZone.current
