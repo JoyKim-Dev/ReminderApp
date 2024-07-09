@@ -35,6 +35,7 @@
 		3586C5122C34450F0093A00F /* ButtonConfiguration + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */; };
 		35D827062C3D307200342594 /* DueDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D827052C3D307200342594 /* DueDateViewModel.swift */; };
 		35D827082C3D30E700342594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D827072C3D30E700342594 /* Observable.swift */; };
+		35D8270A2C3D7FD900342594 /* PriorityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D827092C3D7FD900342594 /* PriorityViewModel.swift */; };
 		35F6B3442C352D2E001FACC3 /* LabelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3432C352D2E001FACC3 /* LabelButton.swift */; };
 		35F6B3462C35348A001FACC3 /* DueDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3452C35348A001FACC3 /* DueDateViewController.swift */; };
 		35F6B3482C353498001FACC3 /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F6B3472C353498001FACC3 /* TagViewController.swift */; };
@@ -86,6 +87,7 @@
 		3586C5112C34450F0093A00F /* ButtonConfiguration + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ButtonConfiguration + Extension.swift"; sourceTree = "<group>"; };
 		35D827052C3D307200342594 /* DueDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateViewModel.swift; sourceTree = "<group>"; };
 		35D827072C3D30E700342594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		35D827092C3D7FD900342594 /* PriorityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityViewModel.swift; sourceTree = "<group>"; };
 		35F6B3432C352D2E001FACC3 /* LabelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelButton.swift; sourceTree = "<group>"; };
 		35F6B3452C35348A001FACC3 /* DueDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DueDateViewController.swift; sourceTree = "<group>"; };
 		35F6B3472C353498001FACC3 /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				35D827052C3D307200342594 /* DueDateViewModel.swift */,
 				35F6B3472C353498001FACC3 /* TagViewController.swift */,
 				35F6B3492C3534A8001FACC3 /* PriorityViewController.swift */,
+				35D827092C3D7FD900342594 /* PriorityViewModel.swift */,
 				355D58CD2C36AF88002E7DC6 /* AddImageViewController.swift */,
 			);
 			path = Add;
@@ -340,6 +343,7 @@
 				356EF6F92C33EEB50053974F /* DesignResource.swift in Sources */,
 				35F6B3482C353498001FACC3 /* TagViewController.swift in Sources */,
 				35F6B3512C358409001FACC3 /* LabelForStackView.swift in Sources */,
+				35D8270A2C3D7FD900342594 /* PriorityViewModel.swift in Sources */,
 				355D58CE2C36AF88002E7DC6 /* AddImageViewController.swift in Sources */,
 				356EF6D52C33E3B30053974F /* AppDelegate.swift in Sources */,
 				3586C5102C343E2E0093A00F /* RealmModel.swift in Sources */,
